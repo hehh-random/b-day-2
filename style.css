@@ -1,0 +1,231 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: #c40000;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.screen {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+#screen1 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 50px;
+}
+
+.left-section {
+  position: relative;
+}
+
+.polaroid {
+  background: white;
+  padding: 15px 15px 60px;
+  border-radius: 10px;
+  transform: rotate(-5deg);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.polaroid img {
+  width: 320px;
+  height: 320px;
+  object-fit: cover;
+}
+
+.bear {
+  position: absolute;
+  bottom: -20px;
+  left: -20px;
+  font-size: 70px;
+}
+
+.right-section {
+  text-align: center;
+  color: white;
+}
+
+.right-section h1 {
+  margin-bottom: 20px;
+}
+
+.clue {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+#passwordBox {
+  width: 250px;
+  height: 55px;
+  border: none;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.number-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 80px);
+  gap: 12px;
+  justify-content: center;
+}
+
+.number-grid button {
+  height: 70px;
+  border-radius: 50%;
+  border: none;
+  font-size: 24px;
+  font-weight: bold;
+  background: white;
+  color: #c40000;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.number-grid button:hover {
+  transform: scale(1.08);
+}
+
+.next-btn,
+.final-btn,
+.question-box button {
+  margin-top: 25px;
+  padding: 15px 35px;
+  border: none;
+  border-radius: 30px;
+  background: white;
+  color: #c40000;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+#message {
+  margin-top: 15px;
+  font-size: 18px;
+}
+
+.hacker-box,
+.question-box,
+.final-box,
+.love-letter {
+  text-align: center;
+  color: white;
+}
+
+.loading-bar {
+  width: 320px;
+  height: 25px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 20px;
+  margin-top: 30px;
+  overflow: hidden;
+}
+
+.loading-fill {
+  width: 0%;
+  height: 100%;
+  background: white;
+  animation: loading 3s forwards;
+}
+
+@keyframes loading {
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+.question-box h1,
+.final-box h1,
+.love-letter h1 {
+  margin-bottom: 20px;
+  font-size: 50px;
+}
+
+.question-box p,
+.final-box h2 {
+  margin-bottom: 25px;
+  font-size: 28px;
+}
+
+.circle-photo {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: auto;
+  border: 8px solid white;
+  margin-bottom: 25px;
+}
+
+.circle-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.love-letter {
+  max-width: 700px;
+}
+
+.love-letter p {
+  font-size: 22px;
+  line-height: 1.8;
+}
+
+.emoji-row {
+  margin-top: 25px;
+  font-size: 45px;
+}
+
+@media (max-width: 850px) {
+
+  #screen1 {
+    flex-direction: column;
+  }
+
+  .polaroid img {
+    width: 240px;
+    height: 240px;
+  }
+
+  .number-grid {
+    grid-template-columns: repeat(3, 65px);
+  }
+
+  .number-grid button {
+    height: 60px;
+  }
+
+  .question-box h1,
+  .final-box h1,
+  .love-letter h1 {
+    font-size: 35px;
+  }
+
+  .love-letter p {
+    font-size: 18px;
+  }
+
+}

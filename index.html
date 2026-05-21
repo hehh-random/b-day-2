@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Love Game ❤️</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- MUSIC -->
+  <audio autoplay loop>
+    <source src="music.mp3" type="audio/mp3">
+  </audio>
+
+
+  <!-- SCREEN 1 -->
+  <div class="screen" id="screen1">
+
+    <div class="left-section">
+      <div class="polaroid">
+        <img src="ins.jpg" alt="photo">
+      </div>
+
+      <div class="bear">🧸</div>
+    </div>
+
+    <div class="right-section">
+
+      <h1>LOVE SECURITY SYSTEM ❤️</h1>
+
+      <p class="clue">Clue: “The number you always spam me with 👀”</p>
+
+      <input type="password" id="passwordBox" readonly>
+
+      <div class="number-grid">
+        <button onclick="addNumber('1')">1</button>
+        <button onclick="addNumber('2')">2</button>
+        <button onclick="addNumber('3')">3</button>
+        <button onclick="addNumber('4')">4</button>
+        <button onclick="addNumber('5')">5</button>
+        <button onclick="addNumber('6')">6</button>
+        <button onclick="addNumber('7')">7</button>
+        <button onclick="addNumber('8')">8</button>
+        <button onclick="addNumber('9')">9</button>
+        <button onclick="clearBox()">C</button>
+        <button onclick="addNumber('0')">0</button>
+        <button onclick="deleteOne()">⌫</button>
+      </div>
+
+      <button class="next-btn" onclick="checkPassword()">
+        ENTER
+      </button>
+
+      <p id="message"></p>
+
+    </div>
+
+  </div>
+
+
+  <!-- HACKER SCREEN -->
+  <div class="screen hidden" id="hackerScreen">
+
+    <div class="hacker-box">
+
+      <h1>ACCESS DENIED 💀</h1>
+
+      <p>Hacking into your heart...</p>
+
+      <div class="loading-bar">
+        <div class="loading-fill"></div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- LEVEL 2 -->
+  <div class="screen hidden" id="questionScreen">
+
+    <div class="question-box">
+
+      <h1>LEVEL 2 ❤️</h1>
+
+      <p>Who is the prettiest person ever? 😌</p>
+
+      <button onclick="showLoveLetter()">You 💖</button>
+      <button onclick="showLoveLetter()">Still You 💖</button>
+      <button onclick="showLoveLetter()">Obviously You 💖</button>
+
+    </div>
+
+  </div>
+
+
+  <!-- LOVE LETTER -->
+  <div class="screen hidden" id="loveScreen">
+
+    <div class="love-letter">
+
+      <h1>OPENED ❤️</h1>
+
+      <div class="circle-photo">
+        <img src="inst2.jpg" alt="photo">
+      </div>
+
+      <p>
+        Congratulations. You survived the hardest game ever 😌<br><br>
+
+        I just wanted to remind you that no matter how much I tease you,
+        you're still my favorite person ❤️<br><br>
+
+        Thank you for staying, loving me, annoying me,
+        and making my life prettier every day ✨<br><br>
+
+        You officially unlocked my heart 💌
+      </p>
+
+      <button class="final-btn" onclick="finalMessage()">
+        FINAL SURPRISE
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- FINAL SCREEN -->
+  <div class="screen hidden" id="finalScreen">
+
+    <div class="final-box">
+
+      <h1>YOU FINISHED THE GAME ❤️</h1>
+
+      <h2>But you still haven't escaped loving me 😭</h2>
+
+      <div class="emoji-row">
+        💖 ✨ 🧸 🌸 🎀 ❤️
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
