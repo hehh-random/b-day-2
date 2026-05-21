@@ -1,161 +1,850 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Love Game ❤️</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Love Game ❤️</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:#c40000;
+  min-height:100vh;
+  overflow-x:hidden;
+  transition:0.5s;
+}
+
+body.dark{
+  background:#0f0f0f;
+  color:white;
+}
+
+/* FLOATING HEARTS */
+
+.hearts{
+  position:fixed;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  z-index:-1;
+}
+
+.hearts span{
+  position:absolute;
+  bottom:-50px;
+  color:white;
+  animation:float 10s linear infinite;
+  font-size:20px;
+}
+
+@keyframes float{
+  from{
+    transform:translateY(0);
+    opacity:1;
+  }
+  to{
+    transform:translateY(-120vh);
+    opacity:0;
+  }
+}
+
+/* GENERAL */
+
+.screen{
+  width:100%;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+.hidden{
+  display:none !important;
+}
+
+.main-btn{
+  margin-top:20px;
+  padding:15px 30px;
+  border:none;
+  border-radius:30px;
+  background:white;
+  color:#c40000;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.main-btn:hover{
+  transform:scale(1.05);
+}
+
+/* DARK MODE BUTTON */
+
+.theme-toggle{
+  position:fixed;
+  top:20px;
+  right:20px;
+  z-index:999;
+}
+
+/* SCREEN 1 */
+
+#screen1{
+  gap:60px;
+  flex-wrap:wrap;
+}
+
+.polaroid{
+  background:white;
+  padding:15px 15px 60px;
+  border-radius:12px;
+  transform:rotate(-5deg);
+}
+
+.polaroid img{
+  width:320px;
+  height:320px;
+  object-fit:cover;
+}
+
+.right-section{
+  text-align:center;
+  color:white;
+}
+
+.right-section h1{
+  margin-bottom:20px;
+  font-size:42px;
+}
+
+.clue{
+  margin-bottom:20px;
+  font-size:18px;
+}
+
+#passwordBox{
+  width:250px;
+  height:55px;
+  border:none;
+  border-radius:12px;
+  text-align:center;
+  font-size:24px;
+  margin-bottom:20px;
+}
+
+.number-grid{
+  display:grid;
+  grid-template-columns:repeat(3,80px);
+  gap:12px;
+  justify-content:center;
+}
+
+.number-grid button{
+  width:80px;
+  height:80px;
+  border:none;
+  border-radius:50%;
+  background:white;
+  color:#c40000;
+  font-size:24px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* HEART EXPLOSION */
+
+.heart{
+  position:fixed;
+  font-size:25px;
+  animation:explode 2s linear forwards;
+  pointer-events:none;
+}
+
+@keyframes explode{
+  to{
+    transform:translateY(-300px) rotate(720deg);
+    opacity:0;
+  }
+}
+
+/* QUESTION */
+
+.question-box,
+.love-letter,
+.final-box,
+.quiz-box,
+.gift-box,
+.proposal-box{
+  text-align:center;
+  color:white;
+}
+
+.question-box button{
+  margin:10px;
+}
+
+/* LOVE LETTER */
+
+.circle-photo{
+  width:250px;
+  height:250px;
+  border-radius:50%;
+  overflow:hidden;
+  margin:auto;
+  border:8px solid white;
+  margin-bottom:25px;
+}
+
+.circle-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.love-letter{
+  max-width:700px;
+}
+
+.love-letter p{
+  font-size:22px;
+  line-height:1.8;
+  min-height:150px;
+}
+
+/* QUIZ */
+
+.quiz-options button{
+  display:block;
+  margin:15px auto;
+}
+
+/* GIFT */
+
+.gift{
+  font-size:140px;
+  cursor:pointer;
+  animation:bounce 1.5s infinite;
+}
+
+@keyframes bounce{
+  50%{
+    transform:translateY(-10px);
+  }
+}
+
+/* FINAL */
+
+.carousel{
+  position:relative;
+  width:300px;
+  margin:auto;
+}
+
+.carousel img{
+  width:100%;
+  height:400px;
+  object-fit:cover;
+  border-radius:20px;
+  border:5px solid white;
+}
+
+.caption{
+  margin-top:15px;
+  font-size:20px;
+}
+
+.date{
+  opacity:0.8;
+  margin-top:5px;
+}
+
+.final-text{
+  margin-top:30px;
+  font-size:24px;
+  line-height:1.8;
+}
+
+/* PROPOSAL */
+
+#yesBtn{
+  margin-right:20px;
+}
+
+#noBtn{
+  position:relative;
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+
+  .polaroid img{
+    width:240px;
+    height:240px;
+  }
+
+  .number-grid{
+    grid-template-columns:repeat(3,65px);
+  }
+
+  .number-grid button{
+    width:65px;
+    height:65px;
+  }
+
+}
+
+</style>
 </head>
+
 <body>
+
+<div class="hearts" id="hearts"></div>
+
+<button class="main-btn theme-toggle" onclick="toggleTheme()">
+🌙 Dark Mode
+</button>
 
 <audio id="bgMusic" loop>
   <source src="bairan.mp3" type="audio/mp3">
 </audio>
 
 <!-- SCREEN 1 -->
+
 <div class="screen" id="screen1">
 
-  <div class="left-section">
-    <div class="polaroid">
-      <img src="ins.jpg">
-    </div>
+<div class="polaroid">
+<img src="ins.jpg">
+</div>
 
-    <div class="bear">🧸</div>
-  </div>
+<div class="right-section">
 
-  <div class="right-section">
+<h1>LOVE SECURITY SYSTEM ❤️</h1>
 
-    <h1>LOVE SECURITY SYSTEM ❤️</h1>
+<p class="clue">
+Clue: “The number you always spam me with 👀”
+</p>
 
-    <p class="clue">
-      Clue: “The number you always spam me with 👀”
-    </p>
+<input type="password" id="passwordBox" readonly>
 
-    <input type="password" id="passwordBox" readonly>
+<div class="number-grid">
 
-    <div class="number-grid">
+<button onclick="addNumber('1')">1</button>
+<button onclick="addNumber('2')">2</button>
+<button onclick="addNumber('3')">3</button>
 
-      <button onclick="addNumber('1')">1</button>
-      <button onclick="addNumber('2')">2</button>
-      <button onclick="addNumber('3')">3</button>
+<button onclick="addNumber('4')">4</button>
+<button onclick="addNumber('5')">5</button>
+<button onclick="addNumber('6')">6</button>
 
-      <button onclick="addNumber('4')">4</button>
-      <button onclick="addNumber('5')">5</button>
-      <button onclick="addNumber('6')">6</button>
+<button onclick="addNumber('7')">7</button>
+<button onclick="addNumber('8')">8</button>
+<button onclick="addNumber('9')">9</button>
 
-      <button onclick="addNumber('7')">7</button>
-      <button onclick="addNumber('8')">8</button>
-      <button onclick="addNumber('9')">9</button>
-
-      <button onclick="clearBox()">C</button>
-      <button onclick="addNumber('0')">0</button>
-      <button onclick="deleteOne()">⌫</button>
-
-    </div>
-
-    <button class="main-btn" onclick="checkPassword()">
-      ENTER
-    </button>
-
-    <p id="message"></p>
-
-  </div>
+<button onclick="clearBox()">C</button>
+<button onclick="addNumber('0')">0</button>
+<button onclick="deleteOne()">⌫</button>
 
 </div>
 
-<!-- HACKER SCREEN -->
-<div class="screen hidden" id="hackerScreen">
+<button class="main-btn" onclick="checkPassword()">
+ENTER
+</button>
 
-  <div class="hacker-box">
-
-    <h1>ACCESS DENIED 💀</h1>
-
-    <p>Hacking into your heart...</p>
-
-    <div class="loading-bar">
-      <div class="loading-fill"></div>
-    </div>
-
-  </div>
+<p id="message"></p>
 
 </div>
+</div>
 
-<!-- LEVEL 2 -->
+<!-- QUESTION SCREEN -->
+
 <div class="screen hidden" id="questionScreen">
 
-  <div class="question-box">
+<div class="question-box">
 
-    <h1>LEVEL 2 ❤️</h1>
+<h1>LEVEL 2 ❤️</h1>
 
-    <p>Who is the prettiest person ever? 😌</p>
+<p>Who is the prettiest person ever? 😌</p>
 
-    <button onclick="openLetter(1)">You 💖</button>
-    <button onclick="openLetter(2)">Still You 💖</button>
-    <button onclick="openLetter(3)">Obviously You 💖</button>
+<button class="main-btn" onclick="openLetter(1)">
+You 💖
+</button>
 
-  </div>
+<button class="main-btn" onclick="openLetter(2)">
+Still You 💖
+</button>
 
+<button class="main-btn" onclick="openLetter(3)">
+Obviously You 💖
+</button>
+
+</div>
 </div>
 
 <!-- LOVE LETTER -->
+
 <div class="screen hidden" id="loveScreen">
 
-  <div class="love-letter">
+<div class="love-letter">
 
-    <h1 id="loveTitle">OPENED ❤️</h1>
+<h1>OPENED ❤️</h1>
 
-    <div class="circle-photo">
-      <img id="inst2" src="pic">
-    </div>
+<div class="circle-photo">
+<img id="loveImage" src="pic1.jpg">
+</div>
 
-    <p id="loveText"></p>
+<p id="loveText"></p>
 
-    <button class="main-btn" onclick="goBack()">
-      BACK ❤️
-    </button>
+<button class="main-btn" onclick="goQuiz()">
+NEXT LEVEL ✨
+</button>
 
-    <button class="main-btn" onclick="finalMessage()">
-      FINAL SURPRISE ✨
-    </button>
+</div>
+</div>
 
-  </div>
+<!-- QUIZ -->
+
+<div class="screen hidden" id="quizScreen">
+
+<div class="quiz-box">
+
+<h1>LOVE QUIZ 🎮</h1>
+
+<p>Who loves you the most? 😌</p>
+
+<div class="quiz-options">
+
+<button class="main-btn" onclick="correctQuiz()">
+YOU ❤️
+</button>
+
+<button class="main-btn" onclick="wrongQuiz()">
+THE NEIGHBOR 💀
+</button>
+
+<button class="main-btn" onclick="wrongQuiz()">
+RANDOM CAT 🐈
+</button>
 
 </div>
 
-<!-- FINAL SCREEN -->
+<p id="quizMessage"></p>
+
+</div>
+</div>
+
+<!-- GIFT -->
+
+<div class="screen hidden" id="giftScreen">
+
+<div class="gift-box">
+
+<h1>FINAL SURPRISE 🎁</h1>
+
+<div class="gift" onclick="openGift()">
+🎁
+</div>
+
+<p>Tap the gift 😭❤️</p>
+
+</div>
+</div>
+
+<!-- FINAL -->
+
 <div class="screen hidden" id="finalScreen">
 
-  <div class="final-box">
+<div class="final-box">
 
-    <h1>LOVE YOUUU ❤️</h1>
+<h1>LOVE YOUUU ❤️</h1>
 
-    <h2>
-      You are literally my favorite human ever 😭✨
-    </h2>
+<div class="carousel">
 
-    <div class="gallery">
+<img id="carouselImage" src="ins.jpg">
 
-      <img src="ins.jpg">
-      <img src="inst2.jpg">
-      <img src="inst3.jpg">
-      <img src="inst3.jpg">
-      <img src="ins.jpg">
-      <img src="instt1.jpg">
-      <img src="inst2.jpg">
+<div class="caption" id="caption">
+you being cute again 😭
+</div>
 
-    </div>
-
-    <p class="final-text">
-      Thank you for existing ❤️<br>
-      Thank you for loving me ❤️<br>
-      And thank you for being YOU 😌✨
-    </p>
-
-  </div>
+<div class="date" id="date">
+May 2026 ❤️
+</div>
 
 </div>
 
-<script src="script.js"></script>
+<p class="final-text">
+Thank you for existing ❤️<br>
+Thank you for loving me ❤️<br>
+And thank you for being YOU 😌✨
+</p>
+
+<button class="main-btn" onclick="goProposal()">
+ONE LAST THING 💍
+</button>
+
+</div>
+</div>
+
+<!-- PROPOSAL -->
+
+<div class="screen hidden" id="proposalScreen">
+
+<div class="proposal-box">
+
+<h1>Will you stay mine forever? ❤️</h1>
+
+<button class="main-btn" id="yesBtn"
+onclick="yesAnswer()">
+YES 😭❤️
+</button>
+
+<button class="main-btn" id="noBtn">
+NO 💀
+</button>
+
+<p id="proposalMessage"></p>
+
+</div>
+</div>
+
+<script>
+
+const passwordBox =
+document.getElementById("passwordBox");
+
+const message =
+document.getElementById("message");
+
+const correctPassword = "143";
+
+const loveText =
+document.getElementById("loveText");
+
+const loveImage =
+document.getElementById("loveImage");
+
+/* HEARTS */
+
+for(let i=0;i<40;i++){
+
+  let heart = document.createElement("span");
+
+  heart.innerHTML = "❤️";
+
+  heart.style.left =
+    Math.random()*100 + "%";
+
+  heart.style.animationDuration =
+    (5 + Math.random()*5) + "s";
+
+  heart.style.fontSize =
+    (15 + Math.random()*30) + "px";
+
+  document.getElementById("hearts")
+    .appendChild(heart);
+}
+
+/* PASSWORD */
+
+function addNumber(number){
+
+  if(passwordBox.value.length < 6){
+    passwordBox.value += number;
+  }
+}
+
+function clearBox(){
+  passwordBox.value = "";
+}
+
+function deleteOne(){
+  passwordBox.value =
+    passwordBox.value.slice(0,-1);
+}
+
+/* HEART EXPLOSION */
+
+function createExplosion(){
+
+  for(let i=0;i<30;i++){
+
+    const heart =
+      document.createElement("div");
+
+    heart.classList.add("heart");
+
+    heart.innerHTML = "❤️";
+
+    heart.style.left =
+      Math.random()*100 + "vw";
+
+    heart.style.top =
+      Math.random()*100 + "vh";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+      heart.remove();
+    },2000);
+  }
+}
+
+function checkPassword(){
+
+  if(passwordBox.value === correctPassword){
+
+    message.innerText =
+      "ACCESS GRANTED ❤️";
+
+    createExplosion();
+
+    document
+      .getElementById("bgMusic")
+      .play();
+
+    setTimeout(()=>{
+
+      document
+        .getElementById("screen1")
+        .classList.add("hidden");
+
+      document
+        .getElementById("questionScreen")
+        .classList.remove("hidden");
+
+    },2000);
+
+  }
+
+  else{
+
+    message.innerText =
+      "WRONG 😭 TRY AGAIN";
+
+    passwordBox.value = "";
+  }
+}
+
+/* TYPEWRITER */
+
+function typeWriter(text){
+
+  loveText.innerHTML = "";
+
+  let i = 0;
+
+  let speed = 40;
+
+  function typing(){
+
+    if(i < text.length){
+
+      loveText.innerHTML += text.charAt(i);
+
+      i++;
+
+      setTimeout(typing,speed);
+    }
+  }
+
+  typing();
+}
+
+/* OPEN LETTER */
+
+function openLetter(choice){
+
+  document
+    .getElementById("questionScreen")
+    .classList.add("hidden");
+
+  document
+    .getElementById("loveScreen")
+    .classList.remove("hidden");
+
+  if(choice === 1){
+
+    loveImage.src = "pic1.jpg";
+
+    typeWriter(
+      "You are literally the cutest person ever 😭❤️ I still smile at every little thing you do ✨"
+    );
+  }
+
+  else if(choice === 2){
+
+    loveImage.src = "pic2.jpg";
+
+    typeWriter(
+      "Still you. Always you 😌❤️ No matter what happens, you're still my favorite person."
+    );
+  }
+
+  else{
+
+    loveImage.src = "pic3.jpg";
+
+    typeWriter(
+      "Obviously you 🙄❤️ Like be serious... nobody can compete with you 😭✨"
+    );
+  }
+}
+
+/* QUIZ */
+
+function goQuiz(){
+
+  document
+    .getElementById("loveScreen")
+    .classList.add("hidden");
+
+  document
+    .getElementById("quizScreen")
+    .classList.remove("hidden");
+}
+
+function wrongQuiz(){
+
+  document
+    .getElementById("quizMessage")
+    .innerText =
+      "WRONG 😭 try again clown";
+}
+
+function correctQuiz(){
+
+  document
+    .getElementById("giftScreen")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("quizScreen")
+    .classList.add("hidden");
+}
+
+/* GIFT */
+
+function openGift(){
+
+  document
+    .getElementById("giftScreen")
+    .classList.add("hidden");
+
+  document
+    .getElementById("finalScreen")
+    .classList.remove("hidden");
+}
+
+/* CAROUSEL */
+
+const images = [
+
+{
+  src:"ins.jpg",
+  caption:"you being cute again 😭",
+  date:"May 2026 ❤️"
+},
+
+{
+  src:"inst2.jpg",
+  caption:"literally my favorite pic 😌",
+  date:"April 2026 ❤️"
+},
+
+{
+  src:"inst3.jpg",
+  caption:"i still smile at this 😭",
+  date:"March 2026 ❤️"
+},
+
+{
+  src:"instt1.jpg",
+  caption:"how are you this adorable 💀❤️",
+  date:"February 2026 ❤️"
+}
+
+];
+
+let current = 0;
+
+function updateCarousel(){
+
+  document
+    .getElementById("carouselImage")
+    .src = images[current].src;
+
+  document
+    .getElementById("caption")
+    .innerText =
+      images[current].caption;
+
+  document
+    .getElementById("date")
+    .innerText =
+      images[current].date;
+
+  current++;
+
+  if(current >= images.length){
+    current = 0;
+  }
+}
+
+setInterval(updateCarousel,3000);
+
+/* DARK MODE */
+
+function toggleTheme(){
+
+  document.body.classList.toggle("dark");
+}
+
+/* PROPOSAL */
+
+function goProposal(){
+
+  document
+    .getElementById("finalScreen")
+    .classList.add("hidden");
+
+  document
+    .getElementById("proposalScreen")
+    .classList.remove("hidden");
+}
+
+function yesAnswer(){
+
+  document
+    .getElementById("proposalMessage")
+    .innerText =
+      "YAYYYYY 😭❤️";
+}
+
+/* RUNAWAY BUTTON */
+
+const noBtn =
+document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover",()=>{
+
+  noBtn.style.left =
+    Math.random()*300 - 150 + "px";
+
+  noBtn.style.top =
+    Math.random()*200 - 100 + "px";
+});
+
+</script>
 
 </body>
 </html>
