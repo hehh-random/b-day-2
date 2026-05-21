@@ -2,7 +2,7 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family: Arial, sans-serif;
+  font-family:Arial, sans-serif;
 }
 
 body{
@@ -24,8 +24,6 @@ body{
   display:none !important;
 }
 
-/* SCREEN 1 */
-
 #screen1{
   gap:60px;
   flex-wrap:wrap;
@@ -40,7 +38,6 @@ body{
   padding:15px 15px 60px;
   border-radius:12px;
   transform:rotate(-5deg);
-  box-shadow:0 10px 30px rgba(0,0,0,0.3);
 }
 
 .polaroid img{
@@ -81,8 +78,6 @@ body{
   margin-bottom:20px;
 }
 
-/* NUMBER PAD */
-
 .number-grid{
   display:grid;
   grid-template-columns:repeat(3,80px);
@@ -100,20 +95,12 @@ body{
   font-size:24px;
   font-weight:bold;
   cursor:pointer;
-  transition:0.2s;
 }
 
-.number-grid button:hover{
-  transform:scale(1.08);
-}
-
-/* BUTTONS */
-
-.next-btn,
-.final-btn,
+.main-btn,
 .question-box button{
-  margin-top:25px;
-  padding:15px 35px;
+  margin-top:20px;
+  padding:15px 30px;
   border:none;
   border-radius:30px;
   background:white;
@@ -121,23 +108,13 @@ body{
   font-size:18px;
   font-weight:bold;
   cursor:pointer;
-  transition:0.2s;
-}
-
-.next-btn:hover,
-.final-btn:hover,
-.question-box button:hover{
-  transform:scale(1.05);
 }
 
 #message{
   margin-top:20px;
-  min-height:30px;
   font-size:18px;
-  font-weight:bold;
+  min-height:30px;
 }
-
-/* OTHER SCREENS */
 
 .hacker-box,
 .question-box,
@@ -157,8 +134,8 @@ body{
 }
 
 .loading-fill{
-  height:100%;
   width:0%;
+  height:100%;
   background:white;
   animation:loading 3s forwards;
 }
@@ -167,23 +144,9 @@ body{
   from{
     width:0%;
   }
-
   to{
     width:100%;
   }
-}
-
-.question-box h1,
-.final-box h1,
-.love-letter h1{
-  font-size:50px;
-  margin-bottom:20px;
-}
-
-.question-box p,
-.final-box h2{
-  font-size:28px;
-  margin-bottom:25px;
 }
 
 .circle-photo{
@@ -209,14 +172,30 @@ body{
 .love-letter p{
   font-size:22px;
   line-height:1.8;
+  margin-bottom:20px;
 }
 
-.emoji-row{
-  margin-top:25px;
-  font-size:45px;
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:15px;
+  margin-top:30px;
+  max-width:900px;
 }
 
-/* MOBILE */
+.gallery img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-radius:15px;
+  border:5px solid white;
+}
+
+.final-text{
+  margin-top:30px;
+  font-size:24px;
+  line-height:1.8;
+}
 
 @media(max-width:850px){
 
@@ -234,13 +213,7 @@ body{
     height:65px;
   }
 
-  .question-box h1,
-  .final-box h1,
-  .love-letter h1{
-    font-size:35px;
-  }
-
-  .love-letter p{
-    font-size:18px;
+  .gallery{
+    grid-template-columns:1fr 1fr;
   }
 }

@@ -1,151 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Love Game ❤️</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- MUSIC -->
-  <audio id="bgMusic" loop>
-    <source src="bairan.mp3" type="audio/mp3">
-  </audio>
+<audio id="bgMusic" loop>
+  <source src="bairan.mp3" type="audio/mp3">
+</audio>
 
-  <!-- SCREEN 1 -->
-  <div class="screen" id="screen1">
+<!-- SCREEN 1 -->
+<div class="screen" id="screen1">
 
-    <div class="left-section">
-      <div class="polaroid">
-        <img src="ins.jpg" alt="photo">
-      </div>
-
-      <div class="bear">🧸</div>
+  <div class="left-section">
+    <div class="polaroid">
+      <img src="ins.jpg">
     </div>
 
-    <div class="right-section">
+    <div class="bear">🧸</div>
+  </div>
 
-      <h1>LOVE SECURITY SYSTEM ❤️</h1>
+  <div class="right-section">
 
-      <p class="clue">
-        Clue: “The number you always spam me with 👀”
-      </p>
+    <h1>LOVE SECURITY SYSTEM ❤️</h1>
 
-      <input type="password" id="passwordBox" readonly>
+    <p class="clue">
+      Clue: “The number you always spam me with 👀”
+    </p>
 
-      <div class="number-grid">
-        <button onclick="addNumber('1')">1</button>
-        <button onclick="addNumber('2')">2</button>
-        <button onclick="addNumber('3')">3</button>
-        <button onclick="addNumber('4')">4</button>
-        <button onclick="addNumber('5')">5</button>
-        <button onclick="addNumber('6')">6</button>
-        <button onclick="addNumber('7')">7</button>
-        <button onclick="addNumber('8')">8</button>
-        <button onclick="addNumber('9')">9</button>
+    <input type="password" id="passwordBox" readonly>
 
-        <button onclick="clearBox()">C</button>
-        <button onclick="addNumber('0')">0</button>
-        <button onclick="deleteOne()">⌫</button>
-      </div>
+    <div class="number-grid">
 
-      <button class="next-btn" onclick="checkPassword()">
-        ENTER
-      </button>
+      <button onclick="addNumber('1')">1</button>
+      <button onclick="addNumber('2')">2</button>
+      <button onclick="addNumber('3')">3</button>
 
-      <p id="message"></p>
+      <button onclick="addNumber('4')">4</button>
+      <button onclick="addNumber('5')">5</button>
+      <button onclick="addNumber('6')">6</button>
 
+      <button onclick="addNumber('7')">7</button>
+      <button onclick="addNumber('8')">8</button>
+      <button onclick="addNumber('9')">9</button>
+
+      <button onclick="clearBox()">C</button>
+      <button onclick="addNumber('0')">0</button>
+      <button onclick="deleteOne()">⌫</button>
+
+    </div>
+
+    <button class="main-btn" onclick="checkPassword()">
+      ENTER
+    </button>
+
+    <p id="message"></p>
+
+  </div>
+
+</div>
+
+<!-- HACKER SCREEN -->
+<div class="screen hidden" id="hackerScreen">
+
+  <div class="hacker-box">
+
+    <h1>ACCESS DENIED 💀</h1>
+
+    <p>Hacking into your heart...</p>
+
+    <div class="loading-bar">
+      <div class="loading-fill"></div>
     </div>
 
   </div>
 
-  <!-- HACKER SCREEN -->
-  <div class="screen hidden" id="hackerScreen">
+</div>
 
-    <div class="hacker-box">
+<!-- LEVEL 2 -->
+<div class="screen hidden" id="questionScreen">
 
-      <h1>ACCESS DENIED 💀</h1>
+  <div class="question-box">
 
-      <p>Hacking into your heart...</p>
+    <h1>LEVEL 2 ❤️</h1>
 
-      <div class="loading-bar">
-        <div class="loading-fill"></div>
-      </div>
+    <p>Who is the prettiest person ever? 😌</p>
 
-    </div>
-
-  </div>
-
-  <!-- QUESTION SCREEN -->
-  <div class="screen hidden" id="questionScreen">
-
-    <div class="question-box">
-
-      <h1>LEVEL 2 ❤️</h1>
-
-      <p>Who is the prettiest person ever? 😌</p>
-
-      <button onclick="showLoveLetter()">You 💖</button>
-      <button onclick="showLoveLetter()">Still You 💖</button>
-      <button onclick="showLoveLetter()">Obviously You 💖</button>
-
-    </div>
+    <button onclick="openLetter(1)">You 💖</button>
+    <button onclick="openLetter(2)">Still You 💖</button>
+    <button onclick="openLetter(3)">Obviously You 💖</button>
 
   </div>
 
-  <!-- LOVE LETTER -->
-  <div class="screen hidden" id="loveScreen">
+</div>
 
-    <div class="love-letter">
+<!-- LOVE LETTER -->
+<div class="screen hidden" id="loveScreen">
 
-      <h1>OPENED ❤️</h1>
+  <div class="love-letter">
 
-      <div class="circle-photo">
-        <img src="inst2.jpg" alt="photo">
-      </div>
+    <h1 id="loveTitle">OPENED ❤️</h1>
 
-      <p>
-        Congratulations. You survived the hardest game ever 😌
-        <br><br>
-
-        I just wanted to remind you that no matter how much I tease you,
-        you're still my favorite person ❤️
-        <br><br>
-
-        Thank you for staying, loving me, annoying me,
-        and making my life prettier every day ✨
-        <br><br>
-
-        You officially unlocked my heart 💌
-      </p>
-
-      <button class="final-btn" onclick="finalMessage()">
-        FINAL SURPRISE
-      </button>
-
+    <div class="circle-photo">
+      <img id="loveImage" src="">
     </div>
+
+    <p id="loveText"></p>
+
+    <button class="main-btn" onclick="goBack()">
+      BACK ❤️
+    </button>
+
+    <button class="main-btn" onclick="finalMessage()">
+      FINAL SURPRISE ✨
+    </button>
 
   </div>
 
-  <!-- FINAL SCREEN -->
-  <div class="screen hidden" id="finalScreen">
+</div>
 
-    <div class="final-box">
+<!-- FINAL SCREEN -->
+<div class="screen hidden" id="finalScreen">
 
-      <h1>YOU FINISHED THE GAME ❤️</h1>
+  <div class="final-box">
 
-      <h2>But you still haven't escaped loving me 😭</h2>
+    <h1>LOVE YOUUU ❤️</h1>
 
-      <div class="emoji-row">
-        💖 ✨ 🧸 🌸 🎀 ❤️
-      </div>
+    <h2>
+      You are literally my favorite human ever 😭✨
+    </h2>
+
+    <div class="gallery">
+
+      <img src="ins.jpg">
+      <img src="inst2.jpg">
+      <img src="inst3.jpg">
+      <img src="inst3.jpg">
+      <img src="ins.jpg">
+      <img src="instt1.jpg">
+      <img src="inst2.jpg">
 
     </div>
 
+    <p class="final-text">
+      Thank you for existing ❤️<br>
+      Thank you for loving me ❤️<br>
+      And thank you for being YOU 😌✨
+    </p>
+
   </div>
 
-  <script src="script.js"></script>
+</div>
+
+<script src="script.js"></script>
 
 </body>
 </html>

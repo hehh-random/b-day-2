@@ -5,11 +5,10 @@ const correctPassword = "143";
 
 let wrongAttempts = 0;
 
-/* MUSIC FIX */
+/* MUSIC */
 window.addEventListener("click", () => {
-  const music = document.getElementById("bgMusic");
-  music.play();
-}, { once: true });
+  document.getElementById("bgMusic").play();
+}, { once:true });
 
 function addNumber(number){
 
@@ -23,7 +22,8 @@ function clearBox(){
 }
 
 function deleteOne(){
-  passwordBox.value = passwordBox.value.slice(0, -1);
+  passwordBox.value =
+    passwordBox.value.slice(0,-1);
 }
 
 function checkPassword(){
@@ -42,7 +42,7 @@ function checkPassword(){
         .getElementById("questionScreen")
         .classList.remove("hidden");
 
-    }, 1500);
+    },1500);
 
   } else {
 
@@ -55,10 +55,10 @@ function checkPassword(){
       "Nopeeeee ❤️"
     ];
 
-    const randomMessage =
-      funnyMessages[Math.floor(Math.random() * funnyMessages.length)];
+    const random =
+      Math.floor(Math.random()*funnyMessages.length);
 
-    message.innerText = randomMessage;
+    message.innerText = funnyMessages[random];
 
     passwordBox.value = "";
 
@@ -82,15 +82,16 @@ function checkPassword(){
           .getElementById("screen1")
           .classList.remove("hidden");
 
-        message.innerText = "";
         wrongAttempts = 0;
 
-      }, 3000);
+      },3000);
     }
   }
 }
 
-function showLoveLetter(){
+/* DIFFERENT LETTERS */
+
+function openLetter(choice){
 
   document
     .getElementById("questionScreen")
@@ -99,7 +100,55 @@ function showLoveLetter(){
   document
     .getElementById("loveScreen")
     .classList.remove("hidden");
+
+  const loveImage =
+    document.getElementById("loveImage");
+
+  const loveText =
+    document.getElementById("loveText");
+
+  if(choice === 1){
+
+    loveImage.src = "pic1.jpg";
+
+    loveText.innerHTML =
+      "You are literally the cutest person ever 😭❤️<br><br>I still smile at every little thing you do ✨";
+
+  }
+
+  else if(choice === 2){
+
+    loveImage.src = "pic2.jpg";
+
+    loveText.innerHTML =
+      "Still you. Always you 😌❤️<br><br>No matter what happens, you're still my favorite person.";
+
+  }
+
+  else{
+
+    loveImage.src = "pic3.jpg";
+
+    loveText.innerHTML =
+      "Obviously you 🙄❤️<br><br>Like be serious... nobody can compete with you 😭✨";
+
+  }
 }
+
+/* BACK */
+
+function goBack(){
+
+  document
+    .getElementById("loveScreen")
+    .classList.add("hidden");
+
+  document
+    .getElementById("questionScreen")
+    .classList.remove("hidden");
+}
+
+/* FINAL */
 
 function finalMessage(){
 
