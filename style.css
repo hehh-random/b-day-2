@@ -2,13 +2,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 body {
   background: #c40000;
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .screen {
@@ -21,14 +21,15 @@ body {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 #screen1 {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  gap: 50px;
+  gap: 60px;
+  flex-wrap: wrap;
 }
 
 .left-section {
@@ -63,6 +64,7 @@ body {
 
 .right-section h1 {
   margin-bottom: 20px;
+  font-size: 38px;
 }
 
 .clue {
@@ -88,14 +90,15 @@ body {
 }
 
 .number-grid button {
-  height: 70px;
-  border-radius: 50%;
+  width: 80px;
+  height: 80px;
   border: none;
+  border-radius: 50%;
   font-size: 24px;
   font-weight: bold;
+  cursor: pointer;
   background: white;
   color: #c40000;
-  cursor: pointer;
   transition: 0.2s;
 }
 
@@ -112,14 +115,15 @@ body {
   border-radius: 30px;
   background: white;
   color: #c40000;
-  font-weight: bold;
   font-size: 18px;
+  font-weight: bold;
   cursor: pointer;
 }
 
 #message {
-  margin-top: 15px;
+  margin-top: 20px;
   font-size: 18px;
+  min-height: 30px;
 }
 
 .hacker-box,
@@ -131,11 +135,11 @@ body {
 }
 
 .loading-bar {
-  width: 320px;
-  height: 25px;
+  width: 300px;
+  height: 20px;
   background: rgba(255,255,255,0.3);
   border-radius: 20px;
-  margin-top: 30px;
+  margin-top: 25px;
   overflow: hidden;
 }
 
@@ -170,8 +174,8 @@ body {
 }
 
 .circle-photo {
-  width: 260px;
-  height: 260px;
+  width: 250px;
+  height: 250px;
   border-radius: 50%;
   overflow: hidden;
   margin: auto;
@@ -201,10 +205,6 @@ body {
 
 @media (max-width: 850px) {
 
-  #screen1 {
-    flex-direction: column;
-  }
-
   .polaroid img {
     width: 240px;
     height: 240px;
@@ -215,7 +215,8 @@ body {
   }
 
   .number-grid button {
-    height: 60px;
+    width: 65px;
+    height: 65px;
   }
 
   .question-box h1,
@@ -227,5 +228,4 @@ body {
   .love-letter p {
     font-size: 18px;
   }
-
 }
