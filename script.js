@@ -86,7 +86,9 @@ function finalMessage() {
 
   document.getElementById("finalScreen").classList.remove("hidden");
 }
-```javascript
+
+
+
 const passwordBox = document.getElementById("passwordBox");
 const message = document.getElementById("message");
 
@@ -169,14 +171,4 @@ function showLoveLetter() {
 
   document.getElementById("questionScreen").classList.add("hidden");
 
-  document.getElementById("loveScreen").classList.remove("hidden");
-
-}
-
-function finalMessage() {
-
-  document.getElementById("loveScreen").classList.add("hidden");
-
-  document.getElementById("finalScreen").classList.remove("hidden");
-
-}
+  document.getElementById("loveScreen").classL
