@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Love Game ❤️</title>
 
 <style>
@@ -16,19 +15,19 @@
 }
 
 body{
-  background:#84e493;
-  min-height:100vh;
+  background:#1c1c1c;
   overflow-x:hidden;
+  min-height:100vh;
   transition:0.5s;
 }
 
 body.dark{
-  background:#0f0f0f;
+  background:#050505;
 }
 
-/* FLOATING HEARTS */
+/* SMOKY BACKGROUND */
 
-.hearts{
+.smoke{
   position:fixed;
   width:100%;
   height:100%;
@@ -36,23 +35,27 @@ body.dark{
   z-index:-1;
 }
 
-.hearts span{
+.smoke span{
   position:absolute;
-  bottom:-50px;
-  color:white;
-  animation:float 10s linear infinite;
-  font-size:20px;
+  bottom:-150px;
+  width:250px;
+  height:250px;
+  background:rgba(255,255,255,0.06);
+  border-radius:50%;
+  filter:blur(60px);
+  animation:smokeMove linear infinite;
 }
 
-@keyframes float{
+@keyframes smokeMove{
+
   from{
-    transform:translateY(0);
-    opacity:1;
+    transform:translateY(0) translateX(0);
   }
+
   to{
-    transform:translateY(-120vh);
-    opacity:0;
+    transform:translateY(-130vh) translateX(120px);
   }
+
 }
 
 /* SCREEN */
@@ -78,7 +81,7 @@ body.dark{
   border:none;
   border-radius:30px;
   background:white;
-  color:#4ca85a;
+  color:#222;
   font-size:18px;
   font-weight:bold;
   cursor:pointer;
@@ -88,8 +91,6 @@ body.dark{
 .main-btn:hover{
   transform:scale(1.05);
 }
-
-/* THEME BUTTON */
 
 .theme-toggle{
   position:fixed;
@@ -156,49 +157,13 @@ body.dark{
   border:none;
   border-radius:50%;
   background:white;
-  color:#4ca85a;
+  color:#222;
   font-size:24px;
   font-weight:bold;
   cursor:pointer;
 }
 
-/* HEART EXPLOSION */
-
-.heart{
-  position:fixed;
-  font-size:25px;
-  pointer-events:none;
-  animation:explode 2s linear forwards;
-}
-
-@keyframes explode{
-  to{
-    transform:translateY(-300px) rotate(720deg);
-    opacity:0;
-  }
-}
-
-/* FULL SCREEN HEARTS */
-
-.big-heart{
-  position:fixed;
-  font-size:40px;
-  animation:fall 4s linear forwards;
-  pointer-events:none;
-}
-
-@keyframes fall{
-  from{
-    transform:translateY(-100px);
-    opacity:1;
-  }
-  to{
-    transform:translateY(120vh);
-    opacity:0;
-  }
-}
-
-/* BOXES */
+/* LOVE LETTER */
 
 .question-box,
 .love-letter,
@@ -209,8 +174,6 @@ body.dark{
   text-align:center;
   color:white;
 }
-
-/* LOVE LETTER */
 
 .circle-photo{
   width:250px;
@@ -236,6 +199,27 @@ body.dark{
   font-size:22px;
   line-height:1.8;
   min-height:150px;
+}
+
+/* QUIZ */
+
+.quiz-box button{
+  display:block;
+  margin:15px auto;
+}
+
+/* GIFT */
+
+.gift{
+  font-size:140px;
+  cursor:pointer;
+  animation:bounce 1.5s infinite;
+}
+
+@keyframes bounce{
+  50%{
+    transform:translateY(-10px);
+  }
 }
 
 /* CAROUSEL */
@@ -269,18 +253,75 @@ body.dark{
   line-height:1.8;
 }
 
-/* GIFT */
+/* HACKER SCREEN */
 
-.gift{
-  font-size:140px;
-  cursor:pointer;
-  animation:bounce 1.5s infinite;
+#hackerScreen{
+  background:black;
+  color:#00ff66;
+  font-family:monospace;
+  flex-direction:column;
 }
 
-@keyframes bounce{
-  50%{
-    transform:translateY(-10px);
+.hacker-text{
+  font-size:22px;
+  margin-bottom:30px;
+  text-shadow:0 0 10px #00ff66;
+}
+
+.matrix{
+  width:100%;
+  height:200px;
+  overflow:hidden;
+  position:relative;
+}
+
+.matrix span{
+  position:absolute;
+  color:#00ff66;
+  font-size:18px;
+  animation:matrixFall linear infinite;
+}
+
+@keyframes matrixFall{
+  from{
+    transform:translateY(-250px);
+    opacity:1;
   }
+
+  to{
+    transform:translateY(250px);
+    opacity:0;
+  }
+}
+
+/* FINAL EMOJI BLAST */
+
+.loveEmoji{
+  position:fixed;
+  font-size:40px;
+  pointer-events:none;
+  animation:blast 4s linear forwards;
+}
+
+@keyframes blast{
+
+  0%{
+    transform:scale(0.5);
+    opacity:1;
+  }
+
+  100%{
+    transform:
+      translate(
+        calc((var(--x) - 0.5) * 1400px),
+        calc((var(--y) - 0.5) * 1400px)
+      )
+      rotate(720deg)
+      scale(2);
+
+    opacity:0;
+  }
+
 }
 
 /* MOBILE */
@@ -308,7 +349,7 @@ body.dark{
 
 <body>
 
-<div class="hearts" id="hearts"></div>
+<div class="smoke" id="smoke"></div>
 
 <button class="main-btn theme-toggle" onclick="toggleTheme()">
 🌙 Dark Mode
@@ -363,6 +404,23 @@ ENTER
 <p id="message"></p>
 
 </div>
+</div>
+
+<!-- HACKER SCREEN -->
+
+<div class="screen hidden" id="hackerScreen">
+
+<div class="hacker-text">
+⚠ ACCESS DENIED ⚠<br><br>
+HACKING INTO YOUR HEART...
+</div>
+
+<div class="matrix" id="matrix"></div>
+
+<h2 style="margin-top:30px;">
+TRY AGAIN 😭
+</h2>
+
 </div>
 
 <!-- QUESTION -->
@@ -523,25 +581,49 @@ RESTART ❤️
 
 <script>
 
-/* FLOATING HEARTS */
+/* SMOKE */
 
-for(let i=0;i<40;i++){
+for(let i=0;i<25;i++){
 
-  let heart = document.createElement("span");
+  const smoke =
+    document.createElement("span");
 
-  heart.innerHTML = "❤️";
-
-  heart.style.left =
+  smoke.style.left =
     Math.random()*100 + "%";
 
-  heart.style.animationDuration =
-    (5 + Math.random()*5) + "s";
+  smoke.style.animationDuration =
+    (10 + Math.random()*15) + "s";
 
-  heart.style.fontSize =
-    (15 + Math.random()*30) + "px";
+  smoke.style.width =
+    (150 + Math.random()*200) + "px";
 
-  document.getElementById("hearts")
-    .appendChild(heart);
+  smoke.style.height =
+    smoke.style.width;
+
+  document
+    .getElementById("smoke")
+    .appendChild(smoke);
+}
+
+/* MATRIX */
+
+for(let i=0;i<60;i++){
+
+  const line =
+    document.createElement("span");
+
+  line.innerHTML =
+    "101010101";
+
+  line.style.left =
+    Math.random()*100 + "%";
+
+  line.style.animationDuration =
+    (2 + Math.random()*4) + "s";
+
+  document
+    .getElementById("matrix")
+    .appendChild(line);
 }
 
 /* PASSWORD */
@@ -553,6 +635,8 @@ const message =
 document.getElementById("message");
 
 const correctPassword = "143";
+
+let wrongAttempts = 0;
 
 function addNumber(number){
 
@@ -566,35 +650,9 @@ function clearBox(){
 }
 
 function deleteOne(){
+
   passwordBox.value =
     passwordBox.value.slice(0,-1);
-}
-
-/* HEART EXPLOSION */
-
-function createExplosion(){
-
-  for(let i=0;i<30;i++){
-
-    const heart =
-      document.createElement("div");
-
-    heart.classList.add("heart");
-
-    heart.innerHTML = "❤️";
-
-    heart.style.left =
-      Math.random()*100 + "vw";
-
-    heart.style.top =
-      Math.random()*100 + "vh";
-
-    document.body.appendChild(heart);
-
-    setTimeout(()=>{
-      heart.remove();
-    },2000);
-  }
 }
 
 function checkPassword(){
@@ -603,8 +661,6 @@ function checkPassword(){
 
     message.innerText =
       "ACCESS GRANTED ❤️";
-
-    createExplosion();
 
     document
       .getElementById("bgMusic")
@@ -620,20 +676,47 @@ function checkPassword(){
         .getElementById("questionScreen")
         .classList.remove("hidden");
 
-    },2000);
+    },1500);
 
   }
 
   else{
 
+    wrongAttempts++;
+
     message.innerText =
-      "WRONG 😭 TRY AGAIN";
+      "WRONG 😭";
 
     passwordBox.value = "";
+
+    if(wrongAttempts >= 3){
+
+      document
+        .getElementById("screen1")
+        .classList.add("hidden");
+
+      document
+        .getElementById("hackerScreen")
+        .classList.remove("hidden");
+
+      setTimeout(()=>{
+
+        document
+          .getElementById("hackerScreen")
+          .classList.add("hidden");
+
+        document
+          .getElementById("screen1")
+          .classList.remove("hidden");
+
+        wrongAttempts = 0;
+
+      },3500);
+    }
   }
 }
 
-/* TYPEWRITER */
+/* LOVE LETTER */
 
 const loveText =
 document.getElementById("loveText");
@@ -651,7 +734,8 @@ function typeWriter(text){
 
     if(i < text.length){
 
-      loveText.innerHTML += text.charAt(i);
+      loveText.innerHTML +=
+        text.charAt(i);
 
       i++;
 
@@ -661,8 +745,6 @@ function typeWriter(text){
 
   typing();
 }
-
-/* OPEN LETTER */
 
 function openLetter(choice){
 
@@ -701,8 +783,6 @@ function openLetter(choice){
     );
   }
 }
-
-/* GO BACK */
 
 function goBack(){
 
@@ -772,19 +852,19 @@ const images = [
 
 {
   src:"inst2.jpg",
-  caption:"literally my favorite pic 😌",
+  caption:"literally obsessed with you 😭",
   date:"April 2026 ❤️"
 },
 
 {
   src:"inst3.jpg",
-  caption:"still obsessed with this 😭",
+  caption:"still smiling at this pic 😌",
   date:"March 2026 ❤️"
 },
 
 {
   src:"instt1.jpg",
-  caption:"how are you this adorable 💀❤️",
+  caption:"HOW ARE YOU THIS CUTE 💀❤️",
   date:"February 2026 ❤️"
 }
 
@@ -814,8 +894,6 @@ function updateCarousel(){
     current = 0;
   }
 }
-
-/* 4 SEC */
 
 setInterval(updateCarousel,4000);
 
@@ -852,32 +930,45 @@ function yesAnswer(){
     .getElementById("restartBtn")
     .classList.remove("hidden");
 
-  /* SCREEN FULL HEARTS */
+  const emojis =
+    ["💗","💋","😚","❤️","💕"];
 
-  for(let i=0;i<150;i++){
+  for(let i=0;i<250;i++){
 
-    const heart =
+    const emoji =
       document.createElement("div");
 
-    heart.classList.add("big-heart");
+    emoji.classList.add("loveEmoji");
 
-    heart.innerHTML = "❤️";
+    emoji.innerHTML =
+      emojis[
+        Math.floor(
+          Math.random()*emojis.length
+        )
+      ];
 
-    heart.style.left =
-      Math.random()*100 + "vw";
+    emoji.style.left = "50%";
+    emoji.style.top = "50%";
 
-    heart.style.animationDuration =
-      (2 + Math.random()*3) + "s";
+    emoji.style.setProperty(
+      "--x",
+      Math.random()
+    );
 
-    document.body.appendChild(heart);
+    emoji.style.setProperty(
+      "--y",
+      Math.random()
+    );
+
+    document.body.appendChild(emoji);
 
     setTimeout(()=>{
-      heart.remove();
-    },5000);
+      emoji.remove();
+    },4000);
   }
 }
 
-/* RUNAWAY NO BUTTON */
+/* RUNAWAY BUTTON */
 
 const noBtn =
 document.getElementById("noBtn");
