@@ -1,7 +1,7 @@
 const passwordBox = document.getElementById("passwordBox");
 const message = document.getElementById("message");
 
-const correctPassword = "2425";
+const correctPassword = "143";
 
 let wrongAttempts = 0;
 
