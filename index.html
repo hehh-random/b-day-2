@@ -18,11 +18,6 @@ body{
   background:#1c1c1c;
   overflow-x:hidden;
   min-height:100vh;
-  transition:0.5s;
-}
-
-body.dark{
-  background:#050505;
 }
 
 /* SMOKY BACKGROUND */
@@ -37,9 +32,7 @@ body.dark{
 
 .smoke span{
   position:absolute;
-  bottom:-150px;
-  width:250px;
-  height:250px;
+  bottom:-200px;
   background:rgba(255,255,255,0.06);
   border-radius:50%;
   filter:blur(60px);
@@ -73,7 +66,7 @@ body.dark{
   display:none !important;
 }
 
-/* BUTTONS */
+/* BUTTON */
 
 .main-btn{
   margin-top:20px;
@@ -90,13 +83,6 @@ body.dark{
 
 .main-btn:hover{
   transform:scale(1.05);
-}
-
-.theme-toggle{
-  position:fixed;
-  top:20px;
-  right:20px;
-  z-index:999;
 }
 
 /* FIRST SCREEN */
@@ -163,7 +149,7 @@ body.dark{
   cursor:pointer;
 }
 
-/* LOVE LETTER */
+/* BOXES */
 
 .question-box,
 .love-letter,
@@ -175,9 +161,11 @@ body.dark{
   color:white;
 }
 
+/* LOVE LETTER */
+
 .circle-photo{
-  width:250px;
-  height:250px;
+  width:260px;
+  height:260px;
   border-radius:50%;
   overflow:hidden;
   margin:auto;
@@ -222,7 +210,7 @@ body.dark{
   }
 }
 
-/* CAROUSEL */
+/* FINAL */
 
 .carousel{
   width:300px;
@@ -283,6 +271,7 @@ body.dark{
 }
 
 @keyframes matrixFall{
+
   from{
     transform:translateY(-250px);
     opacity:1;
@@ -292,29 +281,32 @@ body.dark{
     transform:translateY(250px);
     opacity:0;
   }
+
 }
 
-/* FINAL EMOJI BLAST */
+/* EMOJI BLAST */
 
 .loveEmoji{
   position:fixed;
-  font-size:40px;
+  font-size:45px;
   pointer-events:none;
-  animation:blast 4s linear forwards;
+  z-index:9999;
+  animation:blast 1s linear forwards;
 }
 
 @keyframes blast{
 
   0%{
-    transform:scale(0.5);
+    transform:translate(0,0) scale(0.5);
     opacity:1;
   }
 
   100%{
+
     transform:
       translate(
-        calc((var(--x) - 0.5) * 1400px),
-        calc((var(--y) - 0.5) * 1400px)
+        calc(cos(var(--angle)) * var(--distance)),
+        calc(sin(var(--angle)) * var(--distance))
       )
       rotate(720deg)
       scale(2);
@@ -350,10 +342,6 @@ body.dark{
 <body>
 
 <div class="smoke" id="smoke"></div>
-
-<button class="main-btn theme-toggle" onclick="toggleTheme()">
-🌙 Dark Mode
-</button>
 
 <audio id="bgMusic" loop>
 <source src="bairan.mp3" type="audio/mp3">
@@ -406,7 +394,7 @@ ENTER
 </div>
 </div>
 
-<!-- HACKER SCREEN -->
+<!-- HACKER -->
 
 <div class="screen hidden" id="hackerScreen">
 
@@ -457,7 +445,7 @@ Obviously You 💖
 <h1>OPENED ❤️</h1>
 
 <div class="circle-photo">
-<img id="loveImage" src="pic1.jpg">
+<img id="loveImage" src="us1.jpg">
 </div>
 
 <p id="loveText"></p>
@@ -541,8 +529,7 @@ May 2026 ❤️
 
 <p class="final-text">
 Thank you for existing ❤️<br>
-Thank you for loving me ❤️<br>
-And thank you for being YOU 😌✨
+Thank you for loving me ❤️
 </p>
 
 <button class="main-btn" onclick="goProposal()">
@@ -560,8 +547,7 @@ ONE LAST THING 💍
 
 <h1>Will you be mine forever? ❤️</h1>
 
-<button class="main-btn" id="yesBtn"
-onclick="yesAnswer()">
+<button class="main-btn" onclick="yesAnswer()">
 YES 😭❤️
 </button>
 
@@ -716,7 +702,7 @@ function checkPassword(){
   }
 }
 
-/* LOVE LETTER */
+/* TYPEWRITER */
 
 const loveText =
 document.getElementById("loveText");
@@ -746,6 +732,8 @@ function typeWriter(text){
   typing();
 }
 
+/* LETTERS */
+
 function openLetter(choice){
 
   document
@@ -758,7 +746,7 @@ function openLetter(choice){
 
   if(choice === 1){
 
-    loveImage.src = "pic1.jpg";
+    loveImage.src = "us1.jpg";
 
     typeWriter(
       "You are literally the cutest person ever 😭❤️"
@@ -767,7 +755,7 @@ function openLetter(choice){
 
   else if(choice === 2){
 
-    loveImage.src = "pic2.jpg";
+    loveImage.src = "us2.jpg";
 
     typeWriter(
       "Still you. Always you 😌❤️"
@@ -776,7 +764,7 @@ function openLetter(choice){
 
   else{
 
-    loveImage.src = "pic3.jpg";
+    loveImage.src = "us3.jpg";
 
     typeWriter(
       "Obviously you 🙄❤️ Nobody compares to you 😭"
@@ -897,13 +885,6 @@ function updateCarousel(){
 
 setInterval(updateCarousel,4000);
 
-/* DARK MODE */
-
-function toggleTheme(){
-
-  document.body.classList.toggle("dark");
-}
-
 /* PROPOSAL */
 
 function goProposal(){
@@ -917,7 +898,7 @@ function goProposal(){
     .classList.remove("hidden");
 }
 
-/* YES */
+/* EMOJI BLAST */
 
 function yesAnswer(){
 
@@ -931,9 +912,9 @@ function yesAnswer(){
     .classList.remove("hidden");
 
   const emojis =
-    ["💋","💋","💋"];
+    ["💋","💋","💋","💗","😚","💕"];
 
-  for(let i=0;i<250;i++){
+  for(let i=0;i<300;i++){
 
     const emoji =
       document.createElement("div");
@@ -947,24 +928,35 @@ function yesAnswer(){
         )
       ];
 
-    emoji.style.left = "50%";
-    emoji.style.top = "50%";
+    emoji.style.left =
+      window.innerWidth/2 + "px";
+
+    emoji.style.top =
+      window.innerHeight/2 + "px";
+
+    /* FULL CIRCLE */
+
+    const angle =
+      Math.random() * 360 + "deg";
+
+    const distance =
+      (400 + Math.random()*1200) + "px";
 
     emoji.style.setProperty(
-      "--x",
-      Math.random()
+      "--angle",
+      angle
     );
 
     emoji.style.setProperty(
-      "--y",
-      Math.random()
+      "--distance",
+      distance
     );
 
     document.body.appendChild(emoji);
 
     setTimeout(()=>{
       emoji.remove();
-    },4000);
+    },1000);
   }
 }
 
