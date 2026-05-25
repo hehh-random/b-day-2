@@ -283,7 +283,7 @@ body{
   border-radius:50%;
 
   background:
-    rgba(255, 255, 255, 0.382);
+    rgba(255,255,255,0.015);
 
   filter:blur(120px);
 
@@ -1434,7 +1434,34 @@ noBtn.addEventListener("mouseover",()=>{
 
 function restartGame(){
 
-  window.location.href = window.location.href;
+  document
+    .querySelectorAll(".screen")
+    .forEach(screen=>{
+      screen.classList.add("hidden");
+    });
+
+  document
+    .getElementById("screen1")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("proposalMessage")
+    .innerText = "";
+
+  document
+    .getElementById("restartBtn")
+    .classList.add("hidden");
+
+  passwordBox.value = "";
+
+  current = 0;
+
+  wrongAttempts = 0;
+
+  noBtn.style.left = "0px";
+  noBtn.style.top = "0px";
+
+  window.scrollTo(0,0);
 }
 
 </script>
