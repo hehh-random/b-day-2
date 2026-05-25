@@ -15,43 +15,392 @@
 }
 
 body{
-  background:#57bed8;
   overflow-x:hidden;
   min-height:100vh;
+  background:
+    radial-gradient(circle at bottom,
+    #131720 0%,
+    #05060a 45%,
+    #000000 100%);
+  position:relative;
+  color:white;
 }
 
-/* SMOKY BACKGROUND */
+/* =========================
+   GALAXY BACKGROUND
+========================= */
 
-.smoke{
+/* MAIN STAR FIELD */
+
+.stars{
   position:fixed;
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  z-index:-1;
+  inset:0;
+  z-index:-50;
+  animation:spaceDrift 180s linear infinite;
 }
 
-.smoke span{
-  position:absolute;
-  bottom:-200px;
-  background:rgba(71, 223, 106, 0.497);
-  border-radius:50%;
-  filter:blur(60px);
-  animation:smokeMove linear infinite;
-}
-
-@keyframes smokeMove{
+@keyframes spaceDrift{
 
   from{
-    transform:translateY(0) translateX(0);
+    transform:translateY(0);
   }
 
   to{
-    transform:translateY(-130vh) translateX(120px);
+    transform:translateY(-200px);
   }
 
 }
 
-/* SCREEN */
+.star{
+  position:absolute;
+  border-radius:50%;
+  animation:twinkle linear infinite;
+
+  box-shadow:
+    0 0 6px rgba(255,255,255,0.5);
+}
+
+@keyframes twinkle{
+
+  0%{
+    opacity:0.2;
+  }
+
+  50%{
+    opacity:1;
+  }
+
+  100%{
+    opacity:0.2;
+  }
+
+}
+
+/* NEBULA */
+
+.nebula{
+  position:fixed;
+  inset:-20%;
+  z-index:-49;
+
+  background:
+
+    radial-gradient(circle at 20% 30%,
+    rgba(80,120,255,0.08),
+    transparent 28%),
+
+    radial-gradient(circle at 75% 25%,
+    rgba(180,120,255,0.06),
+    transparent 35%),
+
+    radial-gradient(circle at 50% 70%,
+    rgba(255,255,255,0.02),
+    transparent 40%),
+
+    radial-gradient(circle at 40% 40%,
+    rgba(0,120,255,0.04),
+    transparent 45%);
+
+  filter:blur(120px);
+
+  animation:nebulaMove 50s ease-in-out infinite alternate;
+}
+
+@keyframes nebulaMove{
+
+  from{
+    transform:
+      scale(1)
+      translateX(0px)
+      translateY(0px);
+  }
+
+  to{
+    transform:
+      scale(1.08)
+      translateX(-60px)
+      translateY(30px);
+  }
+
+}
+
+/* MILKY WAY */
+
+.milkyway{
+  position:fixed;
+
+  width:1600px;
+  height:500px;
+
+  left:-300px;
+  top:28%;
+
+  z-index:-48;
+
+  opacity:0.16;
+
+  background:
+    radial-gradient(ellipse at center,
+    rgba(255,255,255,0.16) 0%,
+    rgba(120,160,255,0.08) 30%,
+    transparent 70%);
+
+  transform:
+    rotate(-24deg);
+
+  filter:blur(90px);
+}
+
+/* PLANET */
+
+.planet{
+  position:fixed;
+
+  width:520px;
+  height:520px;
+
+  border-radius:50%;
+
+  top:-220px;
+  right:-220px;
+
+  z-index:-47;
+
+  background:
+    radial-gradient(circle at 30% 30%,
+    #6d5dfc 0%,
+    #312e81 35%,
+    #111827 70%,
+    #000000 100%);
+
+  box-shadow:
+    0 0 80px rgba(99,102,241,0.08);
+}
+
+/* PLANET RING */
+
+.planet::before{
+  content:'';
+
+  position:absolute;
+
+  width:760px;
+  height:120px;
+
+  border:
+    2px solid rgba(255,255,255,0.05);
+
+  border-radius:50%;
+
+  top:200px;
+  left:-120px;
+
+  transform:rotate(-18deg);
+
+  filter:blur(1px);
+}
+
+/* MOONS */
+
+.moon{
+  position:fixed;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(circle at 30% 30%,
+    #ffffff 0%,
+    #cfcfd4 55%,
+    #494950 100%);
+
+  z-index:-46;
+
+  box-shadow:
+    0 0 30px rgba(255,255,255,0.05);
+}
+
+.moon1{
+  width:110px;
+  height:110px;
+
+  top:90px;
+  left:120px;
+
+  overflow:hidden;
+}
+
+.moon1::after{
+  content:'';
+
+  position:absolute;
+
+  width:100%;
+  height:100%;
+
+  border-radius:50%;
+
+  background:#05060a;
+
+  left:32px;
+}
+
+.moon2{
+  width:70px;
+  height:70px;
+
+  top:250px;
+  left:260px;
+
+  overflow:hidden;
+}
+
+.moon2::after{
+  content:'';
+
+  position:absolute;
+
+  width:100%;
+  height:100%;
+
+  border-radius:50%;
+
+  background:#05060a;
+
+  left:-18px;
+}
+
+/* SPACE DUST */
+
+.dust{
+  position:fixed;
+  inset:0;
+  z-index:-45;
+}
+
+.dust span{
+  position:absolute;
+
+  border-radius:50%;
+
+  background:
+    rgba(255,255,255,0.015);
+
+  filter:blur(120px);
+
+  animation:fogMove linear infinite;
+}
+
+@keyframes fogMove{
+
+  from{
+    transform:
+      translateY(0)
+      translateX(0);
+  }
+
+  to{
+    transform:
+      translateY(-120vh)
+      translateX(100px);
+  }
+
+}
+
+/* SHOOTING STARS */
+
+.meteor{
+  position:fixed;
+
+  width:240px;
+  height:1.5px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0),
+      rgba(255,255,255,1),
+      rgba(255,255,255,0)
+    );
+
+  border-radius:999px;
+
+  filter:blur(0.4px);
+
+  opacity:0;
+
+  transform:
+    rotate(-35deg);
+
+  z-index:-44;
+
+  animation:meteorFall 1.8s linear forwards;
+}
+
+.meteor::before{
+  content:'';
+
+  position:absolute;
+
+  right:-4px;
+  top:-2px;
+
+  width:6px;
+  height:6px;
+
+  border-radius:50%;
+
+  background:white;
+
+  box-shadow:
+    0 0 12px white,
+    0 0 24px rgba(255,255,255,0.8);
+}
+
+@keyframes meteorFall{
+
+  0%{
+    opacity:0;
+
+    transform:
+      translate(0,0)
+      rotate(-35deg)
+      scale(0.7);
+  }
+
+  10%{
+    opacity:1;
+  }
+
+  100%{
+    opacity:0;
+
+    transform:
+      translate(-900px,500px)
+      rotate(-35deg)
+      scale(1);
+  }
+
+}
+
+/* OVERLAY */
+
+.space-overlay{
+  position:fixed;
+  inset:0;
+  z-index:-43;
+
+  background:
+    radial-gradient(circle at center,
+    transparent 0%,
+    rgba(0,0,0,0.15) 70%,
+    rgba(0,0,0,0.55) 100%);
+
+  pointer-events:none;
+}
+
+/* =========================
+   ORIGINAL WEBSITE STYLES
+========================= */
 
 .screen{
   width:100%;
@@ -65,8 +414,6 @@ body{
 .hidden{
   display:none !important;
 }
-
-/* BUTTON */
 
 .main-btn{
   margin-top:20px;
@@ -84,8 +431,6 @@ body{
 .main-btn:hover{
   transform:scale(1.05);
 }
-
-/* FIRST SCREEN */
 
 #screen1{
   gap:60px;
@@ -107,7 +452,6 @@ body{
 
 .right-section{
   text-align:center;
-  color:white;
 }
 
 .right-section h1{
@@ -149,8 +493,6 @@ body{
   cursor:pointer;
 }
 
-/* BOXES */
-
 .question-box,
 .love-letter,
 .quiz-box,
@@ -158,10 +500,7 @@ body{
 .final-box,
 .proposal-box{
   text-align:center;
-  color:white;
 }
-
-/* LOVE LETTER */
 
 .circle-photo{
   width:260px;
@@ -189,14 +528,10 @@ body{
   min-height:150px;
 }
 
-/* QUIZ */
-
 .quiz-box button{
   display:block;
   margin:15px auto;
 }
-
-/* GIFT */
 
 .gift{
   font-size:140px;
@@ -209,8 +544,6 @@ body{
     transform:translateY(-10px);
   }
 }
-
-/* FINAL */
 
 .carousel{
   width:300px;
@@ -240,8 +573,6 @@ body{
   font-size:24px;
   line-height:1.8;
 }
-
-/* HACKER SCREEN */
 
 #hackerScreen{
   background:black;
@@ -284,8 +615,6 @@ body{
 
 }
 
-/* EMOJI BLAST */
-
 .loveEmoji{
   position:fixed;
   font-size:45px;
@@ -316,8 +645,6 @@ body{
 
 }
 
-/* MOBILE */
-
 @media(max-width:850px){
 
   .polaroid img{
@@ -334,6 +661,32 @@ body{
     height:65px;
   }
 
+  .planet{
+    width:340px;
+    height:340px;
+
+    top:-150px;
+    right:-150px;
+  }
+
+  .planet::before{
+    width:500px;
+    height:80px;
+
+    top:125px;
+    left:-80px;
+  }
+
+  .moon1{
+    width:80px;
+    height:80px;
+  }
+
+  .moon2{
+    width:55px;
+    height:55px;
+  }
+
 }
 
 </style>
@@ -341,7 +694,22 @@ body{
 
 <body>
 
-<div class="smoke" id="smoke"></div>
+<!-- GALAXY BACKGROUND -->
+
+<div class="stars" id="stars"></div>
+
+<div class="nebula"></div>
+
+<div class="milkyway"></div>
+
+<div class="planet"></div>
+
+<div class="moon moon1"></div>
+<div class="moon moon2"></div>
+
+<div class="dust" id="dust"></div>
+
+<div class="space-overlay"></div>
 
 <audio id="bgMusic" loop>
 <source src="bairan.mp3" type="audio/mp3">
@@ -567,29 +935,117 @@ RESTART ❤️
 
 <script>
 
-/* SMOKE */
+/* STARS */
 
-for(let i=0;i<25;i++){
+const stars =
+document.getElementById("stars");
 
-  const smoke =
-    document.createElement("span");
+const colors = [
+  "#ffffff",
+  "#dbeafe",
+  "#fde68a",
+  "#bfdbfe"
+];
 
-  smoke.style.left =
+for(let i=0;i<350;i++){
+
+  const star =
+    document.createElement("div");
+
+  star.classList.add("star");
+
+  const size =
+    Math.random()*2.5;
+
+  star.style.width =
+    size + "px";
+
+  star.style.height =
+    size + "px";
+
+  star.style.left =
     Math.random()*100 + "%";
 
-  smoke.style.animationDuration =
-    (10 + Math.random()*15) + "s";
+  star.style.top =
+    Math.random()*100 + "%";
 
-  smoke.style.width =
-    (150 + Math.random()*200) + "px";
+  star.style.background =
+    colors[
+      Math.floor(
+        Math.random()*colors.length
+      )
+    ];
 
-  smoke.style.height =
-    smoke.style.width;
+  star.style.opacity =
+    Math.random();
 
-  document
-    .getElementById("smoke")
-    .appendChild(smoke);
+  star.style.animationDuration =
+    (2 + Math.random()*5) + "s";
+
+  stars.appendChild(star);
 }
+
+/* SPACE DUST */
+
+const dust =
+document.getElementById("dust");
+
+for(let i=0;i<18;i++){
+
+  const fog =
+    document.createElement("span");
+
+  fog.style.left =
+    Math.random()*100 + "%";
+
+  fog.style.bottom =
+    (-200 + Math.random()*200) + "px";
+
+  fog.style.width =
+    (250 + Math.random()*350) + "px";
+
+  fog.style.height =
+    fog.style.width;
+
+  fog.style.animationDuration =
+    (25 + Math.random()*30) + "s";
+
+  dust.appendChild(fog);
+}
+
+/* METEORS */
+
+function createMeteor(){
+
+  const meteor =
+    document.createElement("div");
+
+  meteor.classList.add("meteor");
+
+  meteor.style.top =
+    Math.random()*300 + "px";
+
+  meteor.style.left =
+    (window.innerWidth + 300) + "px";
+
+  document.body.appendChild(meteor);
+
+  setTimeout(()=>{
+    meteor.remove();
+  },1800);
+}
+
+function meteorLoop(){
+
+  createMeteor();
+
+  const nextTime =
+    3500 + Math.random()*6000;
+
+  setTimeout(meteorLoop,nextTime);
+}
+
+meteorLoop();
 
 /* MATRIX */
 
@@ -934,8 +1390,6 @@ function yesAnswer(){
     emoji.style.top =
       window.innerHeight/2 + "px";
 
-    /* FULL CIRCLE */
-
     const angle =
       Math.random() * 360 + "deg";
 
@@ -980,7 +1434,7 @@ noBtn.addEventListener("mouseover",()=>{
 
 function restartGame(){
 
-  location.reload();
+  window.location.href = window.location.href;
 }
 
 </script>
