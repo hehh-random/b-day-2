@@ -1288,27 +1288,27 @@ function openGift(){
 const images = [
 
 {
-  src:"ins.jpg",
-  caption:"cutuuuu again 💋😭",
-  date:"May 2026 ❤️"
+src:"ins.jpg",
+caption:"cutuuuu again 💋😭",
+date:"May 2026 ❤️"
 },
 
 {
-  src:"inst2.jpg",
-  caption:"literally obsessed with you 😭",
-  date:"April 2026 ❤️"
+src:"inst2.jpg",
+caption:"literally obsessed with you 😭",
+date:"April 2026 ❤️"
 },
 
 {
-  src:"inst3.jpg",
-  caption:"mela badhaaa bachhaaa😚",
-  date:"april 2026 ❤️"
+src:"inst3.jpg",
+caption:"mela badhaaa bachhaaa 😚❤️",
+date:"April 2026 ❤️"
 },
 
 {
-  src:"instt1.jpg",
-  caption:"😭🫶🫠",
-  date:"may 2026 ❤️"
+src:"instt1.jpg",
+caption:"😭🫶🫠",
+date:"May 2026 ❤️"
 }
 
 ];
@@ -1317,28 +1317,30 @@ let current = 0;
 
 function updateCarousel(){
 
-  document
-    .getElementById("carouselImage")
-    .src = images[current].src;
+document.getElementById("carouselImage").src =
+images[current].src;
 
-  document
-    .getElementById("caption")
-    .innerText 
-      images[current].caption;
+document
+  .getElementById("caption")
+  .innerText =
+    images[current].caption;
 
-  document
-    .getElementById("date")
-    .innerText =
-      images[current].date;
+document.getElementById("date").innerText =
+images[current].date;
 
-  current++;
+current++;
 
-  if(current >= images.length){
-    current = 0;
-  }
+if(current >= images.length){
+current = 0;
+}
 }
 
-setInterval(updateCarousel,4000);
+/* show first image immediately */
+updateCarousel();
+
+/* rotate every 4 seconds */
+setInterval(updateCarousel, 4000);
+
 
 /* PROPOSAL */
 
